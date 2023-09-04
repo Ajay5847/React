@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TextUtils() {
+function TextUtils(props) {
   const [text, setText] = useState("");
 
   const handleText = (e) => {
@@ -10,15 +10,18 @@ function TextUtils() {
   const handletoUpperCase = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to UpperCase","success");
   };
 
   const handletoLowerCase = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to LowerCase","success");
   };
 
   const handletoClear = () => {
-    setText('');
+    props.showAlert("Text Cleared","success");
+    setText("");
   };
   return (
     <div>
@@ -41,7 +44,10 @@ function TextUtils() {
           Clear Text
         </div>
         <h3 className="summary">Your text summary</h3>
-        <p>{(text.length === 0) ? 0 : text.trim().split(/\s+/).length} words and {text.split(/\s+/).join("").length} Characters</p>
+        <p>
+          {text.length === 0 ? 0 : text.trim().split(/\s+/).length} words and{" "}
+          {text.split(/\s+/).join("").length} Characters
+        </p>
         <h4 className="my-3">Preview</h4>
         <p>{text}</p>
       </div>
